@@ -13,6 +13,23 @@ ground.src = "img/ground.png";
 const beerImg = new Image();
 beerImg.src = "img/beer1.png";
 
+
+// audio
+
+const dead = new Audio();
+const eat = new Audio();
+const up = new Audio();
+const left = new Audio();
+const right = new Audio();
+const down = new Audio();
+
+dead.src = "audio/dead.mp3";
+eat.src = "audio/dead.mp3";
+up.src = "audio/dead.mp3";
+left.src = "audio/dead.mp3";
+right.src = "audio/dead.mp3";
+down.src = "audio/dead.mp3";
+
 // tworzenie snejka :)
 
 let snake = [];
@@ -37,13 +54,18 @@ let score = 0;
 document.addEventListener("keydown", direction);
 
 function direction(event) {
+    // let key = event.keyCode;
     if (event.keyCode == 37 && d != "RIGHT") {
+        left.play();
         d = "LEFT"
     } else if (event.keyCode == 38 && d != "DOWN") {
+        up.play();
         d = "UP"
     } else if (event.keyCode == 39 && d != "LEFT") {
+        right.play();
         d = "RIGHT"
     } else if (event.keyCode == 40 && d != "UP") {
+        down.play();
         d = "DOWN"
     }
 }
@@ -56,6 +78,7 @@ function collision(head, array) {
             return true;
         }
     }
+    return false;
 }
 
 
@@ -91,6 +114,7 @@ function draw() {
 
     if (snakeX == beer.x && snakeY == beer.y) {
         score++;
+        eat.play();
         beer = {
             x: Math.floor(Math.random() * 17 + 1) * box,
             y: Math.floor(Math.random() * 15 + 3) * box,
@@ -113,6 +137,7 @@ function draw() {
     if (snakeX < box || snakeX > 17 * box || snakeY < 3 * box
         || snakeY > 17 * box || collision(newHead, snake)) {
         clearInterval(game);
+        dead.play();
     }
 
 

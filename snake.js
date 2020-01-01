@@ -54,17 +54,17 @@ let score = 0;
 document.addEventListener("keydown", direction);
 
 function direction(event) {
-    // let key = event.keyCode;
-    if (event.keyCode == 37 && d != "RIGHT") {
+    let key = event.keyCode;
+    if (key == 37 && d != "RIGHT") {
         left.play();
         d = "LEFT"
-    } else if (event.keyCode == 38 && d != "DOWN") {
+    } else if (key == 38 && d != "DOWN") {
         up.play();
         d = "UP"
-    } else if (event.keyCode == 39 && d != "LEFT") {
+    } else if (key == 39 && d != "LEFT") {
         right.play();
         d = "RIGHT"
-    } else if (event.keyCode == 40 && d != "UP") {
+    } else if (key == 40 && d != "UP") {
         down.play();
         d = "DOWN"
     }

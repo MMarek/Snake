@@ -37,16 +37,27 @@ let score = 0;
 document.addEventListener("keydown", direction);
 
 function direction(event) {
-    if (event.keyCode == 37 && d !="RIGHT") {
+    if (event.keyCode == 37 && d != "RIGHT") {
         d = "LEFT"
-    } else if (event.keyCode == 38 && d !="DOWN") {
+    } else if (event.keyCode == 38 && d != "DOWN") {
         d = "UP"
-    } else if (event.keyCode == 39 && d !="LEFT") {
+    } else if (event.keyCode == 39 && d != "LEFT") {
         d = "RIGHT"
-    } else if (event.keyCode == 40 && d !="UP") {
+    } else if (event.keyCode == 40 && d != "UP") {
         d = "DOWN"
     }
 }
+
+//funkcja kolizji / check collision function
+
+function collision(head, array) {
+    for (let i = 0; i < array.length; i++) {
+        if (head.x == array[i].x && head.y == array[i].y) {
+            return true;
+        }
+    }
+}
+
 
 // sprowadzenie wszystkiego do przestrzeni roboczej, tworzenie funkcji
 
@@ -64,25 +75,46 @@ function draw() {
     ctx.drawImage(beerImg, beer.x, beer.y);
 
     //pierwszy element snejka (old/first head position)
+
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    //pozbycie ogona
-    snake.pop();
 
     //dokładny kierunek
 
-    if(d="LEFT") snakeX -= box;
-    if(d="UP") snakeY -= box;
-    if(d="RIGHT") snakeX += box;
-    if(d="DOWN") snakeY += box;
+    if (d = "LEFT") snakeX -= box;
+    if (d = "UP") snakeY -= box;
+    if (d = "RIGHT") snakeX += box;
+    if (d = "DOWN") snakeY += box;
+
+    //gdy snejk dorwie się do zdobyczy
+
+    if (snakeX == beer.x && snakeY == beer.y) {
+        score++;
+        beer = {
+            x: Math.floor(Math.random() * 17 + 1) * box,
+            y: Math.floor(Math.random() * 15 + 3) * box,
+        }
+        //nie pozbywamy sie ogona
+    } else {
+        //pozbycie ogona
+        snake.pop();
+    }
 
     //dodawanie elementow snejka w trakcie gry
 
     let newHead = {
-        x:snakeX,
-        y:snakeY
+        x: snakeX,
+        y: snakeY
     }
+
+    //koniec gry / Game Over
+
+    if (snakeX < box || snakeX > 17 * box || snakeY < 3 * box
+        || snakeY > 17 * box || collision(newHead, snake)) {
+        clearInterval(game);
+    }
+
 
     snake.unshift(newHead);
 

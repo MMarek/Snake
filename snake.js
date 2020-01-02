@@ -51,6 +51,8 @@ let score = 0;
 
 // kontrola snejka
 
+let d;
+
 document.addEventListener("keydown", direction);
 
 function direction(event) {
@@ -81,7 +83,6 @@ function collision(head, array) {
     return false;
 }
 
-
 // sprowadzenie wszystkiego do przestrzeni roboczej, tworzenie funkcji
 
 function draw() {
@@ -105,10 +106,10 @@ function draw() {
 
     //dokładny kierunek
 
-    if (d = "LEFT") snakeX -= box;
-    if (d = "UP") snakeY -= box;
-    if (d = "RIGHT") snakeX += box;
-    if (d = "DOWN") snakeY += box;
+    if (d == "LEFT") snakeX -= box;
+    if (d == "UP") snakeY -= box;
+    if (d == "RIGHT") snakeX += box;
+    if (d == "DOWN") snakeY += box;
 
     //gdy snejk dorwie się do zdobyczy
 
@@ -130,7 +131,7 @@ function draw() {
     let newHead = {
         x: snakeX,
         y: snakeY
-    }
+    };
 
     //koniec gry / Game Over
 

@@ -7,5 +7,5 @@ Most popular game in the world. Time killer.
 - Canvas
 - CSS
 
-Look this tutorial: 
+Check this tutorial: 
 - https://www.youtube.com/watch?v=bRlvGoWz6Ig

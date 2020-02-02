@@ -1,6 +1,6 @@
 # Snake
 
-Most popular game in the world. Time killer.
+Most popular game in the world. Time killer. Enjoy: https://mmarek.github.io/Snake/
 
 # Use
 - JS
